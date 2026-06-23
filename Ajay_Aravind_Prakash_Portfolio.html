@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ajay Aravind Prakash — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0e0e10;
+    --bg2:       #16161a;
+    --bg3:       #1e1e24;
+    --border:    #2a2a32;
+    --text:      #e8e8f0;
+    --muted:     #888898;
+    --accent:    #6ee7b7;
+    --accent2:   #a78bfa;
+    --tag-bg:    #1e1e24;
+    --tag-text:  #a0a0b8;
+    --mono:      'JetBrains Mono', monospace;
+    --sans:      'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(14,14,16,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--mono); font-size: 13px; color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 13px; color: var(--muted); letter-spacing: 0.03em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 2rem; max-width: 900px; margin: 0 auto; }
+
+  .section-label {
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 28px; font-weight: 600; color: var(--text);
+    margin-bottom: 40px; line-height: 1.2;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 88vh; display: flex; flex-direction: column;
+    justify-content: center; padding-top: 100px; padding-bottom: 60px;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 12px; color: var(--accent);
+    letter-spacing: 0.1em; margin-bottom: 20px;
+  }
+  .hero-name {
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 600; line-height: 1.05;
+    color: var(--text); margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-role {
+    font-size: 18px; color: var(--muted); font-weight: 300;
+    margin-bottom: 32px; max-width: 560px; line-height: 1.6;
+  }
+  .hero-stats {
+    display: flex; gap: 40px; margin-bottom: 40px; flex-wrap: wrap;
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 2px; }
+  .stat-num { font-size: 26px; font-weight: 600; color: var(--accent); font-family: var(--mono); }
+  .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 10px 22px; border-radius: 6px; font-size: 13px;
+    font-weight: 500; transition: all 0.2s; cursor: pointer;
+    letter-spacing: 0.02em; border: none;
+  }
+  .btn-primary { background: var(--accent); color: #0e0e10; }
+  .btn-primary:hover { background: #4dd4a0; text-decoration: none; }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--muted); text-decoration: none; }
+  .btn-resume { background: transparent; color: var(--accent2); border: 1px solid var(--accent2); }
+  .btn-resume:hover { background: rgba(167,139,250,0.1); text-decoration: none; }
+
+  /* ── ABOUT ── */
+  .about-text {
+    font-size: 16px; color: var(--muted); line-height: 1.9;
+    max-width: 680px; border-left: 2px solid var(--accent);
+    padding-left: 24px;
+  }
+  .about-text strong { color: var(--text); font-weight: 500; }
+
+  /* ── SKILLS ── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .skill-group {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px;
+  }
+  .skill-group-title {
+    font-family: var(--mono); font-size: 11px; color: var(--accent2);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    background: var(--tag-bg); color: var(--tag-text);
+    border: 1px solid var(--border); border-radius: 4px;
+    font-size: 12px; padding: 3px 10px; font-family: var(--mono);
+  }
+  .tag.hot { border-color: #3a3a50; color: #c4b5fd; }
+
+  /* ── PROJECTS ── */
+  .project-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px; margin-bottom: 20px;
+    transition: border-color 0.2s;
+  }
+  .project-card:hover { border-color: #3a3a50; }
+  .project-top {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 16px; margin-bottom: 10px;
+  }
+  .project-title { font-size: 17px; font-weight: 600; color: var(--text); }
+  .project-badge {
+    font-size: 10px; font-family: var(--mono); letter-spacing: 0.08em;
+    padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .badge-ai    { background: #1e1529; color: #c4b5fd; border: 1px solid #3d2f6a; }
+  .badge-fs    { background: #0f1e2a; color: #67c9f8; border: 1px solid #1a4a6a; }
+  .badge-cloud { background: #0f1f18; color: #6ee7b7; border: 1px solid #1a4d35; }
+  .badge-data  { background: #1f1a0f; color: #fbbf24; border: 1px solid #4d3f1a; }
+  .badge-hci   { background: #1f0f1a; color: #f9a8d4; border: 1px solid #4d1a3a; }
+  .project-desc { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.7; }
+  .project-highlights { margin-bottom: 16px; padding-left: 0; list-style: none; }
+  .project-highlights li {
+    font-size: 13px; color: #a0a0b8; padding: 3px 0 3px 16px;
+    position: relative;
+  }
+  .project-highlights li::before {
+    content: '›'; position: absolute; left: 0; color: var(--accent); font-weight: 600;
+  }
+  .project-footer {
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+  .stack-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .project-links { display: flex; gap: 12px; }
+  .project-links a {
+    font-size: 12px; font-family: var(--mono); color: var(--muted);
+    display: flex; align-items: center; gap: 4px;
+    border: 1px solid var(--border); border-radius: 4px; padding: 4px 10px;
+    transition: all 0.2s;
+  }
+  .project-links a:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+
+  /* ── EXPERIENCE ── */
+  .exp-item { display: flex; gap: 24px; margin-bottom: 40px; }
+  .exp-line {
+    display: flex; flex-direction: column; align-items: center; flex-shrink: 0;
+  }
+  .exp-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); margin-top: 6px; flex-shrink: 0;
+  }
+  .exp-connector {
+    width: 1px; background: var(--border); flex: 1; margin-top: 6px;
+  }
+  .exp-content { flex: 1; padding-bottom: 8px; }
+  .exp-role { font-size: 16px; font-weight: 600; color: var(--text); }
+  .exp-company { font-size: 14px; color: var(--accent2); margin-bottom: 2px; }
+  .exp-meta { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-bottom: 12px; }
+  .exp-bullets { list-style: none; padding: 0; }
+  .exp-bullets li {
+    font-size: 13px; color: var(--muted); padding: 3px 0 3px 16px;
+    position: relative; line-height: 1.65;
+  }
+  .exp-bullets li::before { content: '›'; position: absolute; left: 0; color: var(--accent2); font-weight: 600; }
+
+  /* ── ACHIEVEMENTS ── */
+  .ach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .ach-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px;
+  }
+  .ach-icon { font-size: 22px; margin-bottom: 10px; }
+  .ach-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .ach-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── CERTS ── */
+  .cert-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .cert-item {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 18px; display: flex; align-items: center; gap: 12px;
+  }
+  .cert-logo {
+    width: 32px; height: 32px; border-radius: 6px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+  }
+  .cert-logo.oracle { background: #1a0d0d; color: #f87171; border: 1px solid #3a1a1a; }
+  .cert-logo.aws    { background: #1a1200; color: #fbbf24; border: 1px solid #3a2800; }
+  .cert-logo.gcp    { background: #0d1a1a; color: #6ee7b7; border: 1px solid #1a3a3a; }
+  .cert-logo.cam    { background: #0d0f1a; color: #a78bfa; border: 1px solid #1a1f3a; }
+  .cert-name { font-size: 13px; color: var(--text); font-weight: 500; }
+  .cert-issuer { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+
+  /* ── CONTACT ── */
+  #contact { text-align: center; }
+  .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 32px; }
+  .contact-link {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 20px; font-size: 13px; color: var(--muted);
+    transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border); text-align: center;
+    padding: 28px 2rem; font-size: 12px; color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider { border: none; border-top: 1px solid var(--border); max-width: 900px; margin: 0 auto; }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+    section { padding: 60px 1.2rem; }
+    .hero-stats { gap: 24px; }
+    .exp-item { flex-direction: column; gap: 8px; }
+    .exp-line { flex-direction: row; }
+    .exp-connector { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ajay.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow">Available for internships · Milwaukee, WI</div>
+  <h1 class="hero-name">Ajay Aravind<br><span>Prakash</span></h1>
+  <p class="hero-role">Full Stack Software Engineer with <strong style="color:var(--text)">4 years</strong> of industry experience, pursuing MS in Computer Science at UW–Milwaukee. Building across Angular, React, Java, Spring Boot, AWS, and AI/ML systems.</p>
+  <div class="hero-stats">
+    <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Years at Virtusa</span></div>
+    <div class="stat-item"><span class="stat-num">4.0</span><span class="stat-label">GPA at UWM</span></div>
+    <div class="stat-item"><span class="stat-num">5</span><span class="stat-label">Projects</span></div>
+    <div class="stat-item"><span class="stat-num">7</span><span class="stat-label">Certifications</span></div>
+  </div>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="https://github.com/ajayaravind121" target="_blank">GitHub ↗</a>
+    <a class="btn btn-outline" href="https://www.linkedin.com/in/ajayaravindprakash" target="_blank">LinkedIn</a>
+    <a class="btn btn-outline" href="mailto:ajayaravindprakash@gmail.com">Email me</a>
+    <a class="btn btn-resume" href="Ajay_Aravind_Prakash_Resume.pdf" download="Ajay_Aravind_Prakash_Resume.pdf">⬇ Resume</a>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 · About</div>
+  <h2 class="section-title">Who I am</h2>
+  <p class="about-text">
+    I'm a full stack software engineer with <strong>4 years of production experience at Virtusa Corporation</strong>, building enterprise-scale telecom systems for Lumen Technologies — serving <strong>8,000+ users</strong> across network monitoring, operations, and mobile device tracking.<br><br>
+    On the frontend, I've built <strong>micro frontend Angular monorepos with NX</strong>, 23 real-time D3.js dashboards, and ArcGIS geospatial integrations that cut issue identification time by 64%. On the backend, I designed <strong>10+ Spring Boot microservices</strong> processing 1M+ daily records, built GraphQL and REST APIs with JWT/RBAC security, and ran Kafka event-driven pipelines handling 50K+ messages/day. I also pushed into <strong>GenAI</strong> — integrating OpenAI APIs and LangChain RAG pipelines that reduced internal knowledge search time by 60%.<br><br>
+    Now at <strong>UW–Milwaukee</strong> (MS CS, 4.0 GPA), I'm going deeper into AI/ML — medical image enhancement with FFT, similarity search with Weighted LSH, and HCI research. I'm seeking <strong>U.S. software engineering internships for 2026</strong>, with strong interest in full-stack, cloud-native, and Agentic AI systems.
+  </p>
+</section>
+
+<hr class="section-divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">02 · Skills</div>
+  <h2 class="section-title">Technical stack</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Frontend</div>
+      <div class="skill-tags">
+        <span class="tag hot">Angular</span><span class="tag hot">React</span>
+        <span class="tag">TypeScript</span><span class="tag">D3.js</span>
+        <span class="tag">RxState</span><span class="tag">NX Monorepo</span>
+        <span class="tag">Angular Material</span><span class="tag">Redux</span><span class="tag">Signals</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Backend</div>
+      <div class="skill-tags">
+        <span class="tag hot">Java</span><span class="tag hot">Spring Boot</span>
+        <span class="tag">GraphQL</span><span class="tag">REST APIs</span>
+        <span class="tag">Kafka</span><span class="tag">Microservices</span>
+        <span class="tag">Spring Security</span><span class="tag">JWT · RBAC</span><span class="tag">Node.js</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">AI / ML & GenAI</div>
+      <div class="skill-tags">
+        <span class="tag hot">OpenAI APIs</span><span class="tag hot">LangChain</span>
+        <span class="tag">RAG Pipelines</span><span class="tag">Python</span>
+        <span class="tag">OpenCV</span><span class="tag">scikit-image</span>
+        <span class="tag">TF-IDF</span><span class="tag">LSH · MinHash</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Cloud & DevOps</div>
+      <div class="skill-tags">
+        <span class="tag hot">AWS</span><span class="tag">EC2 · Lambda · S3</span>
+        <span class="tag">Docker</span><span class="tag">Concourse CI/CD</span>
+        <span class="tag">Git · GitHub</span><span class="tag">CloudWatch</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Databases</div>
+      <div class="skill-tags">
+        <span class="tag">MySQL</span><span class="tag">PostgreSQL</span>
+        <span class="tag">MongoDB</span><span class="tag">Elasticsearch</span>
+        <span class="tag">Oracle PL/SQL</span><span class="tag">Druid</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Testing & Tools</div>
+      <div class="skill-tags">
+        <span class="tag">Cypress (E2E)</span><span class="tag">Jest</span>
+        <span class="tag">JUnit</span><span class="tag">LoadRunner</span>
+        <span class="tag">Agile / Scrum</span><span class="tag">JIRA</span>
+        <span class="tag">Power BI</span><span class="tag">ArcGIS</span><span class="tag">WCAG</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">03 · Experience</div>
+  <h2 class="section-title">Where I've worked</h2>
+
+  <!-- Virtusa — single 4-year role -->
+  <div class="exp-item">
+    <div class="exp-line">
+      <div class="exp-dot"></div>
+      <div class="exp-connector"></div>
+    </div>
+    <div class="exp-content">
+      <div class="exp-role">Software Engineer — Full Stack Developer</div>
+      <div class="exp-company">Virtusa Corporation</div>
+      <div class="exp-meta">Dec 2021 – Aug 2025 · 4 yrs · Chennai, India · Lumen Technologies (Telecom Domain)</div>
+      <ul class="exp-bullets">
+        <li>Boosted network monitoring accuracy by 90% and cut issue identification time by 64% for 8,000+ users via ArcGIS geospatial integration</li>
+        <li>Designed 10+ Spring Boot microservices with 99.9% uptime, processing 1M+ daily data records and 200K+ API requests/day</li>
+        <li>Built REST APIs and GraphQL services with Spring Security, JWT, and RBAC for enterprise-grade access control</li>
+        <li>Implemented Kafka event-driven architecture handling 50K+ messages/day, reducing alert latency by 40%</li>
+        <li>Eliminated 850+ UI bugs and improved app load time to 100% by adopting RxState and fixing memory leaks</li>
+        <li>Built a micro frontend Angular monorepo using NX with role-based plugin architecture across 7 modules for 8,000+ users</li>
+        <li>Built 23 real-time D3.js dashboards, accelerating outage detection by 100% across 7 network operations teams</li>
+        <li>Optimized queries across MySQL, PostgreSQL, Oracle, Elasticsearch, and Druid via indexing on high-traffic systems</li>
+        <li>Integrated OpenAI APIs and LangChain RAG pipelines, cutting internal knowledge search time by 60%</li>
+        <li>Automated E2E testing with Cypress and achieved 80% unit test coverage with Jest, eliminating 90% of pre-release defects</li>
+        <li>Reduced deployment time by 87% (2 hrs → 15 mins) by automating CI/CD in Concourse across 4 environments</li>
+        <li>Drove 18% NPS growth over 2 years by delivering mobile device tracking features improving workflow for 8,000+ technicians</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">04 · Projects</div>
+  <h2 class="section-title">What I've built</h2>
+
+  <!-- P1: FAFF -->
+  <div class="project-card">
+    <div class="project-top">
+      <div class="project-title">FAFF — Medical Image Enhancement System</div>
+      <span class="project-badge badge-ai">AI · Image Processing</span>
+    </div>
+    <p class="project-desc">Frequency-aware adaptive filtering system that improves noisy X-rays, MRIs, and ultrasound images. Splits images into patches, analyzes each using FFT-based frequency features, and fuses Median, Gaussian, and Unsharp Masking filters — weights optimized per patch using SSIM.</p>
+    <ul class="project-highlights">
+      <li>Built iterative filter weight optimization using per-patch SSIM scores and FFT frequency classification</li>
+      <li>Deployed as an interactive Streamlit app with side-by-side comparison, SSIM heatmaps, and histogram analysis</li>
+      <li>Associated with UW–Milwaukee · Jan 2026 – May 2026</li>
+    </ul>
+    <div class="project-footer">
+      <div class="stack-tags">
+        <span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">scikit-image</span>
+        <span class="tag">NumPy</span><span class="tag">SciPy</span><span class="tag">Streamlit</span><span class="tag">FFT</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/ajayaravind121/medical_enhancement_project" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2: LSH -->
+  <div class="project-card">
+    <div class="project-top">
+      <div class="project-title">Medical Similar Case Retrieval — Weighted LSH</div>
+      <span class="project-badge badge-ai">AI · Data Mining</span>
+    </div>
+    <p class="project-desc">Scalable similarity search engine for unstructured clinical notes. Transforms free-text medical data into TF-IDF vectors, generates compact signatures via Weighted MinHash, and uses LSH to reduce search space — returning ranked, relevant past cases in real time.</p>
+    <ul class="project-highlights">
+      <li>Reduced search space with LSH bucket grouping before final weighted similarity ranking</li>
+      <li>Deployed as an interactive web app with relational schemas and privacy-aware REST APIs</li>
+      <li>Handles real-world challenges: noisy text, performance optimisation, and relevance ranking</li>
+    </ul>
+    <div class="project-footer">
+      <div class="stack-tags">
+        <span class="tag">Python</span><span class="tag">TF-IDF</span><span class="tag">Weighted MinHash</span>
+        <span class="tag">LSH</span><span class="tag">MySQL</span><span class="tag">REST APIs</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/ajayaravind121/weighted_lsh_case_search" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- P3: Financial -->
+  <div class="project-card">
+    <div class="project-top">
+      <div class="project-title">Financial Transaction Management System on Cloud</div>
+      <span class="project-badge badge-cloud">Full Stack · Cloud · Blockchain</span>
+    </div>
+    <p class="project-desc">Serverless, blockchain-based financial application with an Angular frontend and AWS Lambda backend. Enables secure real-time transaction tracking, AI-powered savings recommendations, and spending insights — with zero traditional server infrastructure. Accepted by the ICCS Committee for innovation.</p>
+    <ul class="project-highlights">
+      <li>Architected full system on AWS Lambda, S3, and CloudWatch — no server management overhead</li>
+      <li>Integrated AI-powered automated savings recommendations and spending insights</li>
+      <li>ICCS Committee accepted for innovation and practical impact</li>
+    </ul>
+    <div class="project-footer">
+      <div class="stack-tags">
+        <span class="tag">Angular</span><span class="tag">JavaScript</span><span class="tag">AWS Lambda</span>
+        <span class="tag">S3</span><span class="tag">EC2</span><span class="tag">Blockchain</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/ajayaravind121" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- P4: Turf -->
+  <div class="project-card">
+    <div class="project-top">
+      <div class="project-title">Turf Booking System — Microservices</div>
+      <span class="project-badge badge-fs">Full Stack · Microservices</span>
+    </div>
+    <p class="project-desc">React-based turf booking platform built with independent microservices — MongoDB-backed auth service and MySQL-backed booking service, connected through a centralized Spring Cloud configuration server. JUnit-tested across all service boundaries.</p>
+    <ul class="project-highlights">
+      <li>Zero shared state between microservices — all routing through a config server</li>
+      <li>JUnit test coverage across authentication, booking logic, and API contracts</li>
+      <li>Independent scaling of each service with Spring Boot and Docker</li>
+    </ul>
+    <div class="project-footer">
+      <div class="stack-tags">
+        <span class="tag">React</span><span class="tag">Spring Boot</span><span class="tag">MongoDB</span>
+        <span class="tag">MySQL</span><span class="tag">JUnit</span><span class="tag">Docker</span><span class="tag">Spring Cloud</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/ajayaravind121" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- P5: HCI -->
+  <div class="project-card">
+    <div class="project-top">
+      <div class="project-title">Adaptive Learning Interface — HCI Research Study</div>
+      <span class="project-badge badge-hci">HCI · Research</span>
+    </div>
+    <p class="project-desc">Bias-aware user study evaluating how interface design affects learning outcomes. Designed two React-based interface variants and measured engagement, task completion time, and click behavior — without disclosing design strategies to participants to eliminate expectation bias.</p>
+    <ul class="project-highlights">
+      <li>Adaptive interface consistently outperformed on engagement, clarity, and perceived usefulness</li>
+      <li>Applied WCAG-aligned accessibility principles across both interface variants</li>
+      <li>IUI coursework · UW–Milwaukee · Dec 2025</li>
+    </ul>
+    <div class="project-footer">
+      <div class="stack-tags">
+        <span class="tag">React</span><span class="tag">WCAG</span><span class="tag">Behavioral Analytics</span><span class="tag">HCI</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/ajayaravind121/learning-interface-user-study-object-behavioral-data" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">05 · Recognition</div>
+  <h2 class="section-title">Achievements & certifications</h2>
+
+  <div class="ach-grid" style="margin-bottom: 48px;">
+    <div class="ach-card">
+      <div class="ach-icon">🏆</div>
+      <div class="ach-title">4th Place + Best Presentation</div>
+      <div class="ach-desc">National Level Hackathon, Manipal University Jaipur — 2019. Awarded Best Presentation Team out of national-level competitors.</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon">📈</div>
+      <div class="ach-title">70% Sponsorship Growth</div>
+      <div class="ach-desc">Grew Ignitrron techno-fest sponsorship revenue by 70% as Branding Head across 2021 and 2022 editions.</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon">📄</div>
+      <div class="ach-title">ICCS Committee Accepted</div>
+      <div class="ach-desc">Cloud-based financial system accepted by the International Conference on Computer Science for innovation and practical impact.</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon">📊</div>
+      <div class="ach-title">Power BI Dashboard</div>
+      <div class="ach-desc">Analyzed 900+ event registrations across 30+ institutions, 8 states, and 6 countries with interactive cross-filter drill-down.</div>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-bottom: 16px;">Certifications</div>
+  <div class="cert-list">
+    <div class="cert-item">
+      <div class="cert-logo oracle">OCA</div>
+      <div><div class="cert-name">OCJA Certified Java 8</div><div class="cert-issuer">Oracle · Dec 2021</div></div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-logo aws">AWS</div>
+      <div><div class="cert-name">AWS Developer Associate</div><div class="cert-issuer">Amazon Web Services · 2023</div></div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-logo aws">AWS</div>
+      <div><div class="cert-name">AWS Solution Architect</div><div class="cert-issuer">Amazon Web Services · 2023</div></div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-logo gcp">GCP</div>
+      <div><div class="cert-name">Cloud Engineering Specialization</div><div class="cert-issuer">Google Cloud</div></div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-logo gcp">GCP</div>
+      <div><div class="cert-name">Essential Infrastructure: Core Services</div><div class="cert-issuer">Google Cloud</div></div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-logo gcp">GCP</div>
+      <div><div class="cert-name">Scaling & Automation</div><div class="cert-issuer">Google Cloud</div></div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-logo cam">CAM</div>
+      <div><div class="cert-name">Cambridge English ESOL</div><div class="cert-issuer">Cambridge Assessment · Level A2</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label" style="text-align:center;">06 · Contact</div>
+  <h2 class="section-title" style="text-align:center;">Let's connect</h2>
+  <p style="color: var(--muted); text-align: center; max-width: 480px; margin: 0 auto; font-size: 15px;">
+    Open to software engineering internships for 2026. Interested in full-stack, cloud, and AI/ML roles. Based in Milwaukee, WI — open to remote and relocation.
+  </p>
+  <div class="contact-links">
+    <a class="contact-link" href="mailto:ajayaravindprakash@gmail.com">✉ ajayaravindprakash@gmail.com</a>
+    <a class="contact-link" href="https://www.linkedin.com/in/ajayaravindprakash" target="_blank">LinkedIn ↗</a>
+    <a class="contact-link" href="https://github.com/ajayaravind121" target="_blank">GitHub ↗</a>
+    <a class="contact-link" href="tel:+14142107860">+1 414-210-7860</a>
+  </div>
+</section>
+
+<footer>
+  Built by Ajay Aravind Prakash · ajayaravindprakash@gmail.com · Milwaukee, WI
+</footer>
+
+</body>
+</html>
